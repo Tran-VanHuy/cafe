@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ProductDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +13,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         //
         $show_header = 0;
         $show_footer = 1;
-        return view('home/home', [
+        return view('product-detail/product-detail', [
             'show_header' => $show_header,
-            'show_footer' => $show_footer,
+            'show_footer' => $show_footer
         ]);
     }
 

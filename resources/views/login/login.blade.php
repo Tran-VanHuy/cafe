@@ -1,6 +1,12 @@
 @extends('layout')
 @section('title', 'Đăng nhập')
 
+<style>
+    main {
+
+        padding-bottom: 0px !important;
+    }
+</style>
 @section('content')
 
     <div class="relative">

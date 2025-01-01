@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderInfoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetailController;
+
 
 
 
@@ -17,10 +23,16 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
-
-Route::get('/dang-nhap', [Login::class, 'index']);
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/dang-nhap', [Login::class, 'index']);
+Route::get('/chi-tiet-san-pham/{slug}', [ProductDetailController::class, 'index']);
+Route::get('/danh-muc-san-pham', [CategoryController::class, 'index']);
+Route::get('/gio-hang', [CartController::class, 'index']);
+Route::get('/dat-hang', [OrderController::class, 'index']);
+Route::get('/thong-tin-dat-hang', [OrderInfoController::class, 'index']);
+
+
+
+
+
 

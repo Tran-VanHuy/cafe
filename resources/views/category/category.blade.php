@@ -1,130 +1,8 @@
 @extends('layout')
-@section('title', 'Trang chủ')
+@section('title', 'Danh mục sản phẩm')
 
 @section('content')
-    <div class="relative flex items-center justify-between pt-[50px] px-[120px]">
-        <div></div>
-        <div>
-            <div class="border-[1px] border-black p-1 flex items-center">
-                <div class="p-1 bg-black text-white">KAPUCHINO</div>
-                <div class="font-bold px-5">HOUSE</div>
-            </div>
-        </div>
-        <div class="flex items-center gap-[12px]">
-            <div class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="-1.5 0 13 13">
-                    <path id="Path_1" data-name="Path 1"
-                        d="M80.974,837h-10V825.969h1.989A2.023,2.023,0,0,1,75,824H76.88a2.021,2.021,0,0,1,2.042,1.969h2.052Zm-5-12.011c-1.374,0-2.015.339-2.033.98h4.035C77.961,825.368,77.207,824.978,75.974,824.989Zm4,2.011H78.926v.994h-.943V827H73.934v.994H72.96V827H71.943v9h8.031Z"
-                        transform="translate(-70.974 -824)" fill="#444" />
-                </svg>
-                <div
-                    class="w-[18px] h-[18px] bg-[#c7a46c] flex items-center justify-center text-[12px] rounded-full absolute -left-[5px] -bottom-[8px] text-white">
-                    0</div>
-            </div>
-            <div class="text-gray-500">giỏ hàng: 0đ</div>
-            <div class="w-[55px] h-[55px] bg-[#3a3a3a] rounded-full flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
-                    width="22px" height="22px" fill-rule="nonzero">
-                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                        style="mix-blend-mode: normal">
-                        <g transform="scale(5.12,5.12)">
-                            <path
-                                d="M5,8c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,23c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175zM5,38c-0.72127,-0.0102 -1.39216,0.36875 -1.75578,0.99175c-0.36361,0.623 -0.36361,1.39351 0,2.01651c0.36361,0.623 1.0345,1.00195 1.75578,0.99175h40c0.72127,0.0102 1.39216,-0.36875 1.75578,-0.99175c0.36361,-0.623 0.36361,-1.39351 0,-2.01651c-0.36361,-0.623 -1.0345,-1.00195 -1.75578,-0.99175z" />
-                        </g>
-                    </g>
-                </svg>
-            </div>
-        </div>
-    </div>
-    <div class="flex items-center justify-between pt-[50px] px-[120px] mb-[35px]">
-        <div class="flex gap-[22px]">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="22px" height="22px" viewBox="0 0 32 32">
-                    <path
-                        d="M21.95 5.005l-3.306-.004c-3.206 0-5.277 2.124-5.277 5.415v2.495H10.05v4.515h3.317l-.004 9.575h4.641l.004-9.575h3.806l-.003-4.514h-3.803v-2.117c0-1.018.241-1.533 1.566-1.533l2.366-.001.01-4.256z" />
-                </svg>
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px"
-                    height="22px" viewBox="0 -2 20 20" version="1.1">
-
-                    <title>twitter [#154]</title>
-                    <desc>Created with Sketch.</desc>
-                    <defs>
-
-                    </defs>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Dribbble-Light-Preview" transform="translate(-60.000000, -7521.000000)" fill="#000000">
-                            <g id="icons" transform="translate(56.000000, 160.000000)">
-                                <path
-                                    d="M10.29,7377 C17.837,7377 21.965,7370.84365 21.965,7365.50546 C21.965,7365.33021 21.965,7365.15595 21.953,7364.98267 C22.756,7364.41163 23.449,7363.70276 24,7362.8915 C23.252,7363.21837 22.457,7363.433 21.644,7363.52751 C22.5,7363.02244 23.141,7362.2289 23.448,7361.2926 C22.642,7361.76321 21.761,7362.095 20.842,7362.27321 C19.288,7360.64674 16.689,7360.56798 15.036,7362.09796 C13.971,7363.08447 13.518,7364.55538 13.849,7365.95835 C10.55,7365.79492 7.476,7364.261 5.392,7361.73762 C4.303,7363.58363 4.86,7365.94457 6.663,7367.12996 C6.01,7367.11125 5.371,7366.93797 4.8,7366.62489 L4.8,7366.67608 C4.801,7368.5989 6.178,7370.2549 8.092,7370.63591 C7.488,7370.79836 6.854,7370.82199 6.24,7370.70483 C6.777,7372.35099 8.318,7373.47829 10.073,7373.51078 C8.62,7374.63513 6.825,7375.24554 4.977,7375.24358 C4.651,7375.24259 4.325,7375.22388 4,7375.18549 C5.877,7376.37088 8.06,7377 10.29,7376.99705"
-                                    id="twitter-[#154]">
-
-                                </path>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-            </div>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
-                    version="1.1" id="Capa_1" width="22px" height="22px" viewBox="0 0 552.77 552.77"
-                    xml:space="preserve">
-                    <g>
-                        <g>
-                            <path
-                                d="M17.95,528.854h71.861c9.914,0,17.95-8.037,17.95-17.951V196.8c0-9.915-8.036-17.95-17.95-17.95H17.95    C8.035,178.85,0,186.885,0,196.8v314.103C0,520.816,8.035,528.854,17.95,528.854z" />
-                            <path
-                                d="M17.95,123.629h71.861c9.914,0,17.95-8.036,17.95-17.95V41.866c0-9.914-8.036-17.95-17.95-17.95H17.95    C8.035,23.916,0,31.952,0,41.866v63.813C0,115.593,8.035,123.629,17.95,123.629z" />
-                            <path
-                                d="M525.732,215.282c-10.098-13.292-24.988-24.223-44.676-32.791c-19.688-8.562-41.42-12.846-65.197-12.846    c-48.268,0-89.168,18.421-122.699,55.27c-6.672,7.332-11.523,5.729-11.523-4.186V196.8c0-9.915-8.037-17.95-17.951-17.95h-64.192    c-9.915,0-17.95,8.035-17.95,17.95v314.103c0,9.914,8.036,17.951,17.95,17.951h71.861c9.915,0,17.95-8.037,17.95-17.951V401.666    c0-45.508,2.748-76.701,8.244-93.574c5.494-16.873,15.66-30.422,30.488-40.649c14.83-10.227,31.574-15.343,50.24-15.343    c14.572,0,27.037,3.58,37.393,10.741c10.355,7.16,17.834,17.19,22.436,30.104c4.604,12.912,6.904,41.354,6.904,85.33v132.627    c0,9.914,8.035,17.951,17.949,17.951h71.861c9.914,0,17.949-8.037,17.949-17.951V333.02c0-31.445-1.982-55.607-5.941-72.48    S535.836,228.581,525.732,215.282z" />
-                        </g>
-                    </g>
-                </svg>
-            </div>
-        </div>
-        <div class=" flex items-center gap-[32px] text-[14px]">
-            <a href="" class="font-bold uppercase">TRANG CHỦ</a>
-            <p class="font-bold uppercase flex items-center gap-2">CỬA HÀNG
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#d7cdac"
-                    class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                </svg>
-            </p>
-            <a href="" class="font-bold uppercase">ALBUM</a>
-            <a href="" class="font-bold uppercase">LIÊN HỆ</a>
-        </div>
-        <div class="text-white bg-[#c49a68] px-[32px] h-[40px] flex gap-1 items-center justify-center font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-headset"
-                viewBox="0 0 16 16">
-                <path
-                    d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5" />
-            </svg>
-            <p>+84 988681575</p>
-        </div>
-
-    </div>
-    <div class="grid grid-cols-3">
-        <div class="col-span-1 bg-[#c59a65] p-[30px] text-center text-white">
-            <p class="font-bold text-[20px]">Miễn phí vận chuyển trong hôm nay</p>
-            <span>MUA NGAY</span>
-        </div>
-        <div class="col-span-1 bg-[#3a3a3a] p-[30px] text-center text-white">
-            <p class="font-bold text-[20px]">Giảm giá 5% trên tổng hóa đơn</p>
-            <span>Sử dụng mã: KAPUHO01</span>
-        </div>
-        <div class="col-span-1 bg-[#c59a65] p-[30px] text-center text-white">
-            <p class="font-bold text-[20px]">Giảm giá 10% cho khách hàng có sinh nhật tháng 12</p>
-            <span>Sử dụng mã: KAPUHO02</span>
-        </div>
-    </div>
-    <div class="mb-[50px]">
-        <img src="{{ asset('images/Capture.PNG') }}" alt="" class="w-full">
-    </div>
-    <div class="px-[120px]">
+    <div class="px-[120px] py-[50px]">
         <p class="text-[32px] text-center font-[600] mb-[32px]">MỚI NHẤT</p>
         <div class="flex justify-between items-center text-[#b3b3b3] mb-[50px] uppercase font-[600]">
             <p class="cursor-pointer text-black hover:text-black">Tất cả</p>
@@ -138,12 +16,10 @@
             <p class="cursor-pointer hover:text-black">Thức uống khác</p>
         </div>
         <div class="grid grid-cols-3 gap-[15px]">
-            <div class="col-span-1 bg-[#fffffe] cursor-pointer product" data-modal-target="default-modal-01"
+            <div class="col-span-1 bg-[#fffffe] product cursor-pointer" data-modal-target="default-modal-01"
                 data-modal-toggle="default-modal-01">
-                <div class="h-[400px] overflow-hidden">
-                    <img src="{{ asset('images/Capture_01.PNG') }}" alt="" srcset=""
-                        class="w-full rounded-lg h-full">
-                </div>
+                <div class="h-[400px] overflow-hidden"><img src="{{ asset('images/Capture_01.PNG') }}" alt="" srcset=""
+                        class="w-full rounded-lg h-full"></div>
                 <div class="py-[12px] flex flex-col justify-between">
                     <div class="mb-[32px]">
                         <p class="text-[#cecece] text-[18px] font-[500]">49.000đ</p>
@@ -154,7 +30,7 @@
             </div>
             <div class="col-span-1 bg-[#fffffe] product cursor-pointer" data-modal-target="default-modal-02"
                 data-modal-toggle="default-modal-02">
-                <div class="overflow-hidden h-[400px]"><img src="{{ asset('images/Capture_03.PNG') }}" alt="" srcset=""
+                <div class="h-[400px] overflow-hidden"><img src="{{ asset('images/Capture_03.PNG') }}" alt="" srcset=""
                         class="w-full rounded-lg h-full"></div>
                 <div class="py-[12px] flex flex-col justify-between">
                     <div class="mb-[32px]">
@@ -405,7 +281,7 @@
                         </div>
                         <div class="border-t-[1px]">
                             <div class="mb-[32px]">
-                                <a href="/chi-tiet-san-pham/1" class="underline text-blue-500">Xem chi tiết sản phẩm</a>
+                                <a href="/chi-tiet-san-pham/2" class="underline text-blue-500">Xem chi tiết sản phẩm</a>
                             </div>
                             <div class="flex mb-[32px]">
                                 <div class="flex items-center mr-1">
@@ -563,7 +439,7 @@
                         </div>
                         <div class="border-t-[1px]">
                             <div class="mb-[32px]">
-                                <a href="/chi-tiet-san-pham/1" class="underline text-blue-500">Xem chi tiết sản phẩm</a>
+                                <a href="/chi-tiet-san-pham/3" class="underline text-blue-500">Xem chi tiết sản phẩm</a>
                             </div>
                             <div class="flex mb-[32px]">
                                 <div class="flex items-center mr-1">
