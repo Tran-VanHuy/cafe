@@ -1,3 +1,7 @@
+## Chạy dự án
+- composer install
+- copy .env.example .env
+
 ## Page
 - [Trang chủ](http://127.0.0.1:8000/)
 - [Đăng nhập](http://127.0.0.1:8000/dang-nhap)
