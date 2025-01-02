@@ -24,7 +24,7 @@
             <footer class="px-[120px] border-t-[2px] pt-[100px] pb-[50px]">
                 <div class="flex justify-between">
                     <div>
-                        <div class="border-[1px] border-black p-[2px] flex items-center mb-[32px]">
+                        <div class="border-[1px] border-black p-[2px] flex items-center mb-[32px] w-fit">
                             <div class="py-1 px-[5px] bg-black text-white">KAPUCHINO</div>
                             <div class="font-bold px-5">HOUSE</div>
                         </div>

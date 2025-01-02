@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\StatisticalAdminController;
+
 
 
 
@@ -30,6 +32,9 @@ Route::get('/danh-muc-san-pham', [CategoryController::class, 'index']);
 Route::get('/gio-hang', [CartController::class, 'index']);
 Route::get('/dat-hang', [OrderController::class, 'index']);
 Route::get('/thong-tin-dat-hang', [OrderInfoController::class, 'index']);
+Route::prefix('/admin')->group(function() {
+    Route::get('/bieu-do', [StatisticalAdminController::class, 'index']);
+});
 
 
 

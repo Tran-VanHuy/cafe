@@ -5,7 +5,7 @@
     <div class="relative flex items-center justify-between pt-[50px] px-[120px]">
         <div></div>
         <div>
-            <div class="border-[1px] border-black p-1 flex items-center">
+            <div class="border-[1px] border-black p-[1px] flex items-center">
                 <div class="p-1 bg-black text-white">KAPUCHINO</div>
                 <div class="font-bold px-5">HOUSE</div>
             </div>
@@ -127,15 +127,33 @@
     <div class="px-[120px]">
         <p class="text-[32px] text-center font-[600] mb-[32px]">MỚI NHẤT</p>
         <div class="flex justify-between items-center text-[#b3b3b3] mb-[50px] uppercase font-[600]">
-            <p class="cursor-pointer text-black hover:text-black">Tất cả</p>
-            <p class="cursor-pointer hover:text-black">Cà phê việt nam</p>
-            <p class="cursor-pointer hover:text-black">Cà phê máy</p>
-            <p class="cursor-pointer hover:text-black">Cold Brew</p>
-            <p class="cursor-pointer hover:text-black">Cloudfee</p>
-            <p class="cursor-pointer hover:text-black">Trà</p>
-            <p class="cursor-pointer hover:text-black">Hi-tea healthy</p>
-            <p class="cursor-pointer hover:text-black">Bánh mặn & ngọt</p>
-            <p class="cursor-pointer hover:text-black">Thức uống khác</p>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer text-black hover:text-black">Tất cả</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Cà phê việt nam</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Cà phê máy</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Cold Brew</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Cloudfee</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Trà</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Hi-tea healthy</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Bánh mặn & ngọt</p>
+            </a>
+            <a href="/danh-muc-san-pham">
+                <p class="cursor-pointer hover:text-black">Thức uống khác</p>
+            </a>
         </div>
         <div class="grid grid-cols-3 gap-[15px]">
             <div class="col-span-1 bg-[#fffffe] cursor-pointer product" data-modal-target="default-modal-01"
@@ -154,8 +172,8 @@
             </div>
             <div class="col-span-1 bg-[#fffffe] product cursor-pointer" data-modal-target="default-modal-02"
                 data-modal-toggle="default-modal-02">
-                <div class="overflow-hidden h-[400px]"><img src="{{ asset('images/Capture_03.PNG') }}" alt="" srcset=""
-                        class="w-full rounded-lg h-full"></div>
+                <div class="overflow-hidden h-[400px]"><img src="{{ asset('images/Capture_03.PNG') }}" alt=""
+                        srcset="" class="w-full rounded-lg h-full"></div>
                 <div class="py-[12px] flex flex-col justify-between">
                     <div class="mb-[32px]">
                         <p class="text-[#cecece] text-[18px] font-[500]">39.000đ</p>
@@ -166,8 +184,8 @@
             </div>
             <div class="col-span-1 bg-[#fffffe] product cursor-pointer" data-modal-target="default-modal-03"
                 data-modal-toggle="default-modal-03">
-                <div class="h-[400px] overflow-hidden"><img src="{{ asset('images/Capture_04.PNG') }}" alt="" srcset=""
-                        class="w-full rounded-lg h-full"></div>
+                <div class="h-[400px] overflow-hidden"><img src="{{ asset('images/Capture_04.PNG') }}" alt=""
+                        srcset="" class="w-full rounded-lg h-full"></div>
                 <div class="py-[12px] flex flex-col justify-between">
                     <div class="mb-[32px]">
                         <p class="text-[#cecece] text-[18px] font-[500]">29.000đ</p>
