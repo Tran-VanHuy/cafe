@@ -5,7 +5,7 @@
     <div class="p-[32px]">
         <div class="grid grid-cols-2 gap-[32px]">
             <div class="col-span-1 p-[22px] bg-[#edfaf0] rounded-lg">
-                <p class="text-[22px] font-[600] mb-1">Sản phẩm nhâp về</p>
+                <p class="text-[22px] font-[600] mb-1">Sản phẩm nhập về</p>
                 <div class="bg-white p-[20px]">
                     <canvas id="myChart01"></canvas>
                 </div>
