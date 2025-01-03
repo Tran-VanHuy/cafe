@@ -11,17 +11,19 @@
             </div>
         </div>
         <div class="flex items-center gap-[12px]">
-            <div class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="-1.5 0 13 13">
-                    <path id="Path_1" data-name="Path 1"
-                        d="M80.974,837h-10V825.969h1.989A2.023,2.023,0,0,1,75,824H76.88a2.021,2.021,0,0,1,2.042,1.969h2.052Zm-5-12.011c-1.374,0-2.015.339-2.033.98h4.035C77.961,825.368,77.207,824.978,75.974,824.989Zm4,2.011H78.926v.994h-.943V827H73.934v.994H72.96V827H71.943v9h8.031Z"
-                        transform="translate(-70.974 -824)" fill="#444" />
-                </svg>
-                <div
-                    class="w-[18px] h-[18px] bg-[#c7a46c] flex items-center justify-center text-[12px] rounded-full absolute -left-[5px] -bottom-[8px] text-white">
-                    0</div>
-            </div>
-            <div class="text-gray-500">giỏ hàng: 0đ</div>
+            <a href="/gio-hang" class="flex items-center gap-[12px]">
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="-1.5 0 13 13">
+                        <path id="Path_1" data-name="Path 1"
+                            d="M80.974,837h-10V825.969h1.989A2.023,2.023,0,0,1,75,824H76.88a2.021,2.021,0,0,1,2.042,1.969h2.052Zm-5-12.011c-1.374,0-2.015.339-2.033.98h4.035C77.961,825.368,77.207,824.978,75.974,824.989Zm4,2.011H78.926v.994h-.943V827H73.934v.994H72.96V827H71.943v9h8.031Z"
+                            transform="translate(-70.974 -824)" fill="#444" />
+                    </svg>
+                    <div
+                        class="w-[18px] h-[18px] bg-[#c7a46c] flex items-center justify-center text-[12px] rounded-full absolute -left-[5px] -bottom-[8px] text-white">
+                        0</div>
+                </div>
+                <div class="text-gray-500">giỏ hàng: 0đ</div>
+            </a>
             <div class="w-[55px] h-[55px] bg-[#3a3a3a] rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
                     width="22px" height="22px" fill-rule="nonzero">
