@@ -2,14 +2,18 @@
 
 @section('title', 'Chi tiết sản phẩm')
 
+@section('static')
+    <script src="{{ asset('js/product-detail.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="px-[120px] pt-[20px]">
         <div class="flex items-center gap-[12px] mb-[32px]">
             <a href="/">Home</a>
             <div>/</div>
-            <div>Cà Phê Việt Nam</div>
+            <div>{{ $product->category->name}}</div>
             <div class="text-[#b8b8b8]">/</div>
-            <div class="text-[#b8b8b8]">Kapuchino House Sữa Đá</div>
+            <div class="text-[#b8b8b8]">{{ $product->name }}</div>
         </div>
         <div class="flex items-center gap-1 mb-[32px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
@@ -25,20 +29,20 @@
             <div class="col-span-5">
                 <div class="container mx-auto">
                     <div class="flex justify-center mb-4">
-                        <img id="mainImage" src="{{ asset('images/Capture_01.PNG') }}" alt="Main Image"
+                        <img id="mainImage" src="/{{ $product->image }}" alt="Main Image"
                             class="w-full max-w-2xl h-96 object-cover rounded-lg shadow-md">
                     </div>
                     <div class="flex justify-center gap-4">
-                        <img src="{{ asset('images/Capture_01.PNG') }}" onclick="changeImage(this)"
+                        <img src="/{{ $product->image_1 }}" onclick="changeImage(this)"
                             class="thumbnail w-24 h-24 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-blue-500 !border-blue-500"
                             alt="Thumbnail 1">
-                        <img src="{{ asset('images/Capture_03.PNG') }}" onclick="changeImage(this)"
+                        <img src="/{{ $product->image_2 }}" onclick="changeImage(this)"
                             class="thumbnail w-24 h-24 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-blue-500"
                             alt="Thumbnail 2">
-                        <img src="{{ asset('images/Capture_04.PNG') }}" onclick="changeImage(this)"
+                        <img src="/{{ $product->image_3 }}" onclick="changeImage(this)"
                             class="thumbnail w-24 h-24 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-blue-500"
                             alt="Thumbnail 3">
-                        <img src="{{ asset('images/Capture_01.PNG') }}" onclick="changeImage(this)"
+                        <img src="/{{ $product->image_4 }}" onclick="changeImage(this)"
                             class="thumbnail w-24 h-24 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-blue-500"
                             alt="Thumbnail 4">
                     </div>
@@ -46,7 +50,14 @@
             </div>
             <div class="col-span-7">
                 <p class="text-[32px] font-[600] mb-[5px]">Kapuchino House Sữa Đá</p>
-                <p class="text-[28px] font-[600] mb-[5px]">39.000đ</p>
+                <div class="flex items-baseline gap-2">
+                    @if ($product->formatted_total_price != $product->formatted_price)
+                    <p class="text-[28px] font-[600] mb-[5px]" id="price-discount">{{ $product->formatted_total_price }}</p>
+                    <span class="text-[18] font-[600] mb-[5px] text-gray-500 line-through" id="price">{{ $product->formatted_price }}</span>
+                    @else
+                    <p class="text-[28px] font-[600] mb-[5px]">{{ $product->formatted_total_price }}</p>
+                    @endif
+                </div>
                 <p class="text-[#a4a4a4] text-[14px] mb-[10px]">Có sẵn: In Stock</p>
                 <div class="flex items-center gap-1">
                     <div class="flex items-center gap-2">
@@ -78,20 +89,19 @@
                     </div>
                     <p class="text-[#b9b8bd]">(Chưa có đánh giá)</p>
                 </div>
+                @if ($product->name_size)
                 <div class="mb-[35px]">
-                    <p class="font-[600] mb-1">SIZE</p>
+                    <p class="font-[600] mb-1">{{ $product->name_size }}</p>
                     <div class="flex gap-1 text-[14px]">
+                        @foreach ($product->size as $item)
                         <p
-                            class="p-1 border-[2px] border-black cursor-pointer hover:bg-[#c59a65] hover:text-white hover:border-[#c59a65]">
-                            Nhỏ</p>
-                        <p
-                            class="p-1 border-[2px] border-black cursor-pointer hover:bg-[#c59a65] hover:text-white hover:border-[#c59a65]">
-                            Vừa</p>
-                        <p
-                            class="p-1 border-[2px] border-black cursor-pointer hover:bg-[#c59a65] hover:text-white hover:border-[#c59a65]">
-                            Lớn</p>
+                        class="info-size p-1 border-[2px] border-black cursor-pointer hover:bg-[#c59a65] hover:text-white hover:border-[#c59a65]" data-formattedTotalPrice="{{ $item->formatted_total_price }}" data-formattedPrice="{{$item->formatted_price}}">
+                        {{ $item->name }}</p>
+                        @endforeach
                     </div>
                 </div>
+                @endif
+               
                 <div class="flex gap-[16px] mb-[35px]">
                     <div class="border-[1px] w-fit flex">
                         <div class="w-[130px] flex items-center px-[8px] text-[14px]">1</div>
@@ -111,16 +121,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-[#c49c61] flex items-center justify-center text-white uppercase px-7 cursor-pointer">Thêm vào giỏ hàng
+                    <div class="bg-[#c49c61] flex items-center justify-center text-white uppercase px-7 cursor-pointer">
+                        Thêm vào giỏ hàng
                     </div>
                 </div>
                 <p class="font-bold uppercase py-[32px] border-t-[1px] border-b-[1px]">Thông tin chi tiết</p>
                 <p class="font-bold uppercase py-[32px] border-b-[1px]">Mô tả</p>
                 <div class="p-[16px]">
-                    <p class="text-[14px] text-[#d5d5d5]">Thức uống giúp tính tạo tức thi để bắt đầu ngày mới thật hứng
-                        khởi. Không đẳng khét như cà phê truyền
-                        thông, Kapuchino House Sữa Đá mang hương vị hài hoà đầy lôi cuốn. Là sự đậm đà của 100% cà phê
-                        Arabica Cầu Đất rang vừa tới, biến tấu tinh tế với sữa đặc và kém sữa ngọt ngào cực quyền rũ.</p>
+                    <p class="text-[14px] text-[#d5d5d5]">{{ $product->content }}</p>
                 </div>
             </div>
         </div>
