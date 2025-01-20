@@ -2,31 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ItemOrder;
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Voucher;
 
-class OrderInfoController extends Controller
+class VoucherApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        $show_header = 0;
-        $show_footer = 1;
-        $order = Order::findOrFail($id);
-        $order->formatted_total_price = number_format($order->total_price, 0, ',', '.') . 'đ';
-        $item_order = ItemOrder::Where('order_id', $order->id)->get();
-        $order->item = $item_order;
-        return view('order-info/order-info', [
-            'show_header' => $show_header,
-            'show_footer' => $show_footer,
-            'order' => $order
-        ]);
     }
 
     /**
@@ -48,6 +36,15 @@ class OrderInfoController extends Controller
     public function store(Request $request)
     {
         //
+        $voucher = Voucher::Where('code' , $request->code)->first();
+        if($voucher) {
+            $voucher->formatted_price = number_format($voucher->price, 0, ',', '.') . 'đ';
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => "SUCCESS",
+            "data" => $voucher
+        ]);
     }
 
     /**

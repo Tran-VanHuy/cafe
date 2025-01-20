@@ -15,11 +15,22 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@example.com', // Địa chỉ email admin
-            'password' => Hash::make('admin'), // Mật khẩu mã hóa
-            'created_at' => now(),
-            'updated_at' => now(),
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com', // Địa chỉ email admin
+                'role' => 'ADMIN',
+                'password' => Hash::make('admin'), // Mật khẩu mã hóa
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'user',
+                'email' => 'user@gmail.com', // Địa chỉ email admin
+                'role' => 'USER',
+                'password' => Hash::make('user'), // Mật khẩu mã hóa
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
 
     }

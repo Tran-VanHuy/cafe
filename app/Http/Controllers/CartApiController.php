@@ -2,31 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ItemOrder;
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Cart;
 
-class OrderInfoController extends Controller
+class CartApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        $show_header = 0;
-        $show_footer = 1;
-        $order = Order::findOrFail($id);
-        $order->formatted_total_price = number_format($order->total_price, 0, ',', '.') . 'đ';
-        $item_order = ItemOrder::Where('order_id', $order->id)->get();
-        $order->item = $item_order;
-        return view('order-info/order-info', [
-            'show_header' => $show_header,
-            'show_footer' => $show_footer,
-            'order' => $order
-        ]);
     }
 
     /**
@@ -48,6 +36,25 @@ class OrderInfoController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'product_id' => 'required|integer|exists:products,id',
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        $cart = Cart::create([
+            'product_id' => $validated['product_id'],
+            'name' => $request->name,
+            'size_id' => $request->size_id,
+            'quantity' => $validated['quantity'],
+            'image' => $request->image,
+            'name_size' => $request->name_size,
+            'user_id' => $request->user_id
+        ]);
+        return response()->json([
+            "status" => 200,
+            "message" => "SUCCESS",
+            "data" => $cart
+        ]);
     }
 
     /**

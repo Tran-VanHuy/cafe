@@ -49,29 +49,34 @@
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <th scope="row"
                                 class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-r-[1px]">
-                                36
+                                {{ $order->id }}
                             </th>
                             <td class="px-3 py-4 border-r-[1px]">
-                                2022-12-02 </br>
-                                16:33:13
+                                {{ $order->created_at->format('d/m/Y') }} </br>
+                                {{ $order->created_at->format('h:m:s') }} </br>
+
                             </td>
                             <td class="px-3 py-4 border-r-[1px]">
                                 Đang xử lí
                             </td>
                             <td class="px-3 py-4 border-r-[1px]">
-                                Kapuchino House Sữa Đá - Size: Lớn (x1)
+                                @foreach ($order->item as $item)
+                                  <div>
+                                    {{$item->name_product}} - Size: {{ $item->name }} (x{{ $item->quantity }})
+                                  </div>
+                                @endforeach
                             </td>
                             <td class="px-3 py-4 border-r-[1px]">
-                                Họ và tên: Nguyen Anh Tu
+                                Họ và tên: {{ $order->full_name}}
                                 <br />
                                 <br />
-                                Số Điện thoại: 0988681575
+                                Số Điện thoại: {{ $order->phone }}
                                 <br />
                                 <br />
-                                Địa chỉ: Da Nang, Da Nang, 470 Tran Dai Nghia
+                                Địa chỉ: {{ $order->address }}
                             </td>
                             <td class="px-3 py-4 border-r-[1px]">
-                                49.000đ
+                                {{ $order->formatted_total_price }}
                             </td>
                             <td class="px-2 py-4 text-center">
                                 <button class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">HỦY ĐƠN</button>

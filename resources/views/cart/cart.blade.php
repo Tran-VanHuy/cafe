@@ -1,5 +1,8 @@
 @extends('layout')
 @section('title', 'Giỏ hàng')
+@section('static')
+<script src="{{ asset('js/cart.js')}}"></script>
+@endsection
 @section('content')
     <div class="px-[120px] py-[50px]">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-[32px]">
@@ -27,52 +30,55 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium whitespace-nowrap dark:text-white flex items-center gap-[16px]">
-                            <div>
-                                <img id="mainImage" src="{{ asset('images/Capture_03.PNG') }}" alt="Main Image"
-                                    class="max-w-2xl w-[120px] h-[120px] object-cover shadow-md">
-                            </div>
-                            <p>Kapuchino House Sứa Đá</p>
-                        </th>
-                        <td class="px-6 py-4">
-                            Lớn
-                        </td>
-                        <td class="px-6 py-4">
-                            49.000đ
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="w-fit">
-                                <div class="flex items-center mr-1">
-                                    <div
-                                        class="px-1 h-[30px] w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
-                                            class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                        </svg>
-                                    </div>
-                                    <div class="w-[40px] h-[30px] flex items-center justify-center bg-[#f6f6f6]">1</div>
-                                    <div
-                                        class="px-1 h-[30px]  w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
-                                            class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                        </svg>
-                                    </div>
+                    @foreach ($carts as $item)
+                    <tr data-data="{{ $item }}"
+                    class="tr-product-cart odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row"
+                        class="px-6 py-4 font-medium whitespace-nowrap dark:text-white flex items-center gap-[16px]">
+                        <div>
+                            <img id="mainImage" src="/{{ $item->image }}" alt="Main Image"
+                                class="max-w-2xl w-[120px] h-[120px] object-cover shadow-md">
+                        </div>
+                        <p>{{ $item->name }}</p>
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $item->name_size }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $item->fotmatted_price_product }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="w-fit">
+                            <div class="flex items-center mr-1">
+                                <div
+                                    class="px-1 h-[30px] w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                                        class="bi bi-dash" viewBox="0 0 16 16">
+                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                    </svg>
                                 </div>
-                                <p class="text-center text-[14px]">Có sẵn: 5</p>
+                                <div class="w-[40px] h-[30px] flex items-center justify-center bg-[#f6f6f6] quantity-product">{{ $item->quantity }}</div>
+                                <div
+                                    class="plus-quantity px-1 h-[30px]  w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                                        class="bi bi-plus" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                    </svg>
+                                </div>
                             </div>
-                        </td>
-                        <td class="px-6 py-4">
-                            49.000đ
-                        </td>
-                        <td class="px-6 py-4">
-                            <button class="bg-[#d73747] px-3 text-white h-[30px] rounded font-[400]">XÓA</button>
-                        </td>
-                    </tr>
+                            <p class="text-center text-[14px]">Có sẵn: {{ $item->size->quantity }}</p>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 total-price">
+                       {{ $item->formatted_total_price }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <button class="bg-[#d73747] px-3 text-white h-[30px] rounded font-[400]">XÓA</button>
+                    </td>
+                </tr>
+                    @endforeach
+                   
                 </tbody>
             </table>
         </div>
@@ -92,8 +98,8 @@
                     <span class="text-gray-500">Enter your cupone code</span>
                 </div>
                 <div class="flex">
-                    <input type="text" class="h-[50px] bg-[#f4f1f8] border-none" placeholder="VD: #569ab15">
-                    <button class="px-5 bg-[#c49b63] text-white font-bold">APPLY</button>
+                    <input type="text" class="h-[50px] bg-[#f4f1f8] border-none" placeholder="VD: #569ab15" id="value-voucher">
+                    <button class="px-5 bg-[#c49b63] text-white font-bold" id="apply-voucher">APPLY</button>
                 </div>
             </div>
             <div class="col-span-3">
@@ -105,20 +111,24 @@
                     <div class="p-[20px] flex flex-col gap-[16px] mb-2">
                         <div class="flex justify-between items-center">
                             <p>Sản phẩm</p>
-                            <p>49.000đ</p>
+                            <p id="price-cart">{{ $total_all_price }}</p>
                         </div>
                         <div class="flex justify-between items-center">
                             <p>Phí vận chuyển</p>
-                            <p>Free</p>
+                            <p>
+                                @if ($shipping_price == 0)
+                                    FREE
+                                @else
+                                    {{ $formatted_shipping_price}}
+                                @endif
+                            </p>
                         </div>
                         <div class="flex justify-between items-center">
                             <b>Tổng tiền</b>
-                            <b>49.000đ</b>
+                            <b id="total-price-cart">{{ $total_all_price }}</b>
                         </div>
                     </div>
-                    <a href="/dat-hang">
-                        <button class="uppercase h-[45px] bg-[#c49b63] w-full text-white font-[600]">Tiến hành đặt hàng</button>
-                    </a>
+                    <button class="uppercase h-[45px] bg-[#c49b63] w-full text-white font-[600]" id="order-now">Tiến hành đặt hàng</button>
                 </div>
             </div>
         </div>

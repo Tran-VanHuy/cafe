@@ -23,6 +23,11 @@ class ProductController extends Controller
             return $item;
         });
         $product->size = $sizes;
+        $product->type = 1;
+        if($sizes) {
+
+            $product->type = 2;
+        }
 
         return response()->json($product);
     }

@@ -23,9 +23,9 @@
                     </svg>
                     <div
                         class="w-[18px] h-[18px] bg-[#c7a46c] flex items-center justify-center text-[12px] rounded-full absolute -left-[5px] -bottom-[8px] text-white">
-                        0</div>
+                        {{ $count_cart }}</div>
                 </div>
-                <div class="text-gray-500">giỏ hàng: 0đ</div>
+                <div class="text-gray-500">giỏ hàng: {{ $total_all_price }}</div>
             </a>
             <div class="w-[55px] h-[55px] bg-[#3a3a3a] rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256"
@@ -253,7 +253,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 text-white bg-[#d93841] rounded flex items-center justify-center cursor-pointer mr-2">
+                                        class="px-2 text-white bg-[#d93841] rounded flex items-center justify-center cursor-pointer mr-2" id="add-cart">
                                         Thêm vào giỏ hàng</div>
                                     <div
                                         class="w-[35px] h-[35px] flex items-center justify-center bg-[#c19964] mr-2 cursor-pointer">

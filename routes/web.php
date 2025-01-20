@@ -10,10 +10,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\StatisticalAdminController;
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +26,15 @@ Route::get('/dang-nhap', [Login::class, 'index']);
 Route::get('/chi-tiet-san-pham/{slug}', [ProductDetailController::class, 'index']);
 Route::get('/danh-muc-san-pham', [CategoryController::class, 'index']);
 Route::get('/gio-hang', [CartController::class, 'index']);
-Route::get('/dat-hang', [OrderController::class, 'index']);
-Route::get('/thong-tin-dat-hang', [OrderInfoController::class, 'index']);
+Route::prefix('/dat-hang')->group(function() {
+    Route::get('/{id}', [OrderController::class, 'index'])->name('order.index');
+    Route::post('', [OrderController::class, 'store'])->name('order.store');
+    Route::put('/{id}', [OrderController::class, 'update'])->name('order.update');
+
+
+
+});
+Route::get('/thong-tin-dat-hang/{id}', [OrderInfoController::class, 'index'])->name('info-order.index');
 Route::prefix('/admin')->group(function() {
     Route::get('/bieu-do', [StatisticalAdminController::class, 'index']);
 });
