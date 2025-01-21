@@ -6242,7 +6242,7 @@ $(document).ready(function () {
             quantity: bodyProduct.quantity,
             image: product.image,
             name_size: bodyProduct.name_size,
-            user_id: "2"
+            user_id: "3"
           });
           _context2.next = 9;
           return axios.post('/api/cart', body);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadFileApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -41,3 +42,5 @@ Route::prefix('order')->group(function() {
 
     Route::post('', [OrderApiController::class, 'store']);
 });
+
+Route::post('upload', [UploadFileApiController::class, 'upload']);

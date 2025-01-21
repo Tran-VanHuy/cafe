@@ -14,8 +14,7 @@ $(document).ready(function () {
 
     })
 
-    const dataInfo = [
-    ]
+    let dataInfo = []
     $("#plus-info").click(function () {
         const idDataInfoLast = dataInfo.length > 0 ? dataInfo[dataInfo.length - 1].index + 1 : 0;
         let itemInfoHtml = '';
@@ -26,18 +25,18 @@ $(document).ready(function () {
             price: '',
             discount_percent: '',
             discount_money: '',
-            quantity: 0,
+            quantity: 1,
         })
         dataInfo.map(item => {
 
             itemInfoHtml += `
-              <div class="grid grid-cols-12 gap-2 mb-5 items-center">
+              <div class="grid grid-cols-12 gap-2 mb-5 items-center item-info">
                         <div class="col-span-3">
                             <div>
                                 <label for="info-name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên</label>
                                 <input type="text" value='${item.name}' id="info-name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="info-name bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
                         </div>
@@ -87,7 +86,7 @@ $(document).ready(function () {
             `
         })
 
-        $("#item-info").html(itemInfoHtml)
+        $("#item-info").html(itemInfoHtml).addClass("border-[1px]")
     })
 
     $("#item-info").on('click', '.dash-info', function () {
@@ -97,13 +96,12 @@ $(document).ready(function () {
         let itemInfoHtml = ``
 
         const data = dataInfo.filter(item => item.index != index)
-        console.log("dataInfo", data);
         if (data && data.length > 0) {
-
-            data.map(item => {
+            dataInfo = data
+            dataInfo.map(item => {
 
                 itemInfoHtml += `
-              <div class="grid grid-cols-12 gap-2 mb-5 items-center">
+              <div class="grid grid-cols-12 gap-2 mb-5 items-center item-info">
                         <div class="col-span-3">
                             <div>
                                 <label for="info-name"
@@ -161,11 +159,173 @@ $(document).ready(function () {
 
             $("#item-info").html(itemInfoHtml)
         } else {
-            
-            $("#item-info").html([])
+            dataInfo = []
+            $("#item-info").html([]).removeClass("border-[1px]")
 
         }
-
     })
 
+    $("#submit-product").click(function() {
+
+        // const form = $('#form-product')[0];
+        console.log("vào đay");
+        
+        // if(form.checkValidity()){
+
+            const nameProduct = $("#name").val();
+            const priceProduct = $("#price").val();
+            const discountPercent = $("#discount_percent").val();
+            const discountMoney = $("#discount_money").val();
+            const quantity = $("#quantity").val()
+            const info = $("#info").val()
+            const itemInfo = $(".item-info").map(function () {
+                return {
+                    nameItem: $(this).find('.info-name').val(),
+                    price: $(this).find('#info-price').val(),
+                    discountPercent: $(this).find('#info-price-percent').val(),
+                    discountMoney: $(this).find('#info-price-money').val(),
+                    quantity: $(this).find('#info-quantity').val()
+                };
+            }).get(); 
+            
+            console.log({nameProduct, priceProduct, discountPercent, discountMoney, quantity, info, itemInfo});
+            
+
+
+        // } else {
+
+        //     form.reportValidity();
+        // }
+    })
+
+    $('#dropzone-file1').on('change', function () {
+        const file = this.files[0];
+
+        if (!file) {
+            toastr.error('Vui lòng chọn một file!')
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Gọi API upload bằng Axios
+        axios.post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(response => {
+            
+            $('#upload-result1').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+            $('#upload-file-1').attr('hidden', true)
+        })
+        .catch(error => {
+            toastr.error("Không thành công...!")
+        });
+    });
+
+    $('#dropzone-file2').on('change', function () {
+        const file = this.files[0];
+
+        if (!file) {
+
+            toastr.error('Vui lòng chọn một file!')
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Gọi API upload bằng Axios
+        axios.post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(response => {
+            
+            $('#upload-result2').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+        })
+        .catch(error => {
+            toastr.error("Không thành công...!")
+        });
+    });
+
+    $('#dropzone-file3').on('change', function () {
+        const file = this.files[0];
+
+        if (!file) {
+            toastr.error('Vui lòng chọn một file!')
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Gọi API upload bằng Axios
+        axios.post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(response => {
+            
+            $('#upload-result3').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+        })
+        .catch(error => {
+            toastr.error("Không thành công...!")
+        });
+    });
+
+    $('#dropzone-file4').on('change', function () {
+        const file = this.files[0];
+
+        if (!file) {
+            toastr.error('Vui lòng chọn một file!')
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Gọi API upload bằng Axios
+        axios.post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(response => {
+            
+            $('#upload-result4').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+        })
+        .catch(error => {
+            toastr.error("Không thành công...!")
+        });
+    });
+
+    $('#dropzone-file5').on('change', function () {
+        const file = this.files[0];
+
+        if (!file) {
+            toastr.error("Vui lòng chọn một file!")
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        // Gọi API upload bằng Axios
+        axios.post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(response => {            
+            $('#upload-result5').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+        })
+        .catch(error => {
+            toastr.error("Không thành công...!")
+        });
+    });
 })
