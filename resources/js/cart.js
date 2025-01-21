@@ -92,9 +92,12 @@ $(document).ready(function() {
        const body = {...priceTotalProduct(), voucher_code}
         
         const res = await axios.post('/api/order', body)
+        console.log(res);
+        
         if(res?.data.status === 200){
 
-            window.location.href = `/dat-hang/${res.data.data.id}`
+            window.location.href = `/dat-hang/${res.data.data}`
         }        
     })
+
 })

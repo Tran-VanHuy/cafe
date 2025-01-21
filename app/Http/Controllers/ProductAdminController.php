@@ -2,32 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ItemOrder;
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Product;
 
-class OrderInfoController extends Controller
+
+class ProductAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        $order = Order::with('item')->Where('user_id', env('USER_ID'))->orderBy('id', 'desc')->get();
-        $order = $order->map(function($item) {
-            $item->formatted_total_price = number_format($item->total_price, 0, ',', '.') . 'đ';
+        $product = Product::with('size')->get();
+        $product = $product->map(function($item) {
+            $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
+            $item->formatted_discount_money = number_format($item->discount_money, 0, ',', '.') . 'đ';
             return $item;
         });
-        // dd($order->toArray());
-        $show_header = 0;
-        $show_footer = 1;
-        return view('order-info/order-info', [
-            'show_header' => $show_header,
-            'show_footer' => $show_footer,
-            'order' => $order
+        return view('admin/products/product', [
+            'product' => $product
         ]);
     }
 

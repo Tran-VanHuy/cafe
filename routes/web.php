@@ -9,6 +9,8 @@ use App\Http\Controllers\Login;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\StatisticalAdminController;
+use App\Http\Controllers\ProductAdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,7 @@ Route::prefix('/dat-hang')->group(function() {
 Route::get('/thong-tin-dat-hang/{id}', [OrderInfoController::class, 'index'])->name('info-order.index');
 Route::prefix('/admin')->group(function() {
     Route::get('/bieu-do', [StatisticalAdminController::class, 'index']);
+    Route::get('/san-pham', [ProductAdminController::class, 'index'])->name('product-admin.index');
 });
 
 

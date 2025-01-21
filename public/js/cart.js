@@ -28228,10 +28228,11 @@ $(document).ready(function () {
           return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/order', body);
         case 3:
           res = _context2.sent;
+          console.log(res);
           if ((res === null || res === void 0 ? void 0 : res.data.status) === 200) {
-            window.location.href = "/dat-hang/".concat(res.data.data.id);
+            window.location.href = "/dat-hang/".concat(res.data.data);
           }
-        case 5:
+        case 6:
         case "end":
           return _context2.stop();
       }

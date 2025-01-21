@@ -45,43 +45,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-r-[1px]">
-                                {{ $order->id }}
-                            </th>
-                            <td class="px-3 py-4 border-r-[1px]">
-                                {{ $order->created_at->format('d/m/Y') }} </br>
-                                {{ $order->created_at->format('h:m:s') }} </br>
+                     @foreach ($order as $item)
+                     <tr
+                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                     <th scope="row"
+                         class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-r-[1px]">
+                         {{ $item->id }}
+                     </th>
+                     <td class="px-3 py-4 border-r-[1px]">
+                         {{ $item->created_at->format('d/m/Y') }} </br>
+                         {{ $item->created_at->format('h:m:s') }} </br>
 
-                            </td>
-                            <td class="px-3 py-4 border-r-[1px]">
-                                Đang xử lí
-                            </td>
-                            <td class="px-3 py-4 border-r-[1px]">
-                                @foreach ($order->item as $item)
-                                  <div>
-                                    {{$item->name_product}} - Size: {{ $item->name }} (x{{ $item->quantity }})
-                                  </div>
-                                @endforeach
-                            </td>
-                            <td class="px-3 py-4 border-r-[1px]">
-                                Họ và tên: {{ $order->full_name}}
-                                <br />
-                                <br />
-                                Số Điện thoại: {{ $order->phone }}
-                                <br />
-                                <br />
-                                Địa chỉ: {{ $order->address }}
-                            </td>
-                            <td class="px-3 py-4 border-r-[1px]">
-                                {{ $order->formatted_total_price }}
-                            </td>
-                            <td class="px-2 py-4 text-center">
-                                <button class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">HỦY ĐƠN</button>
-                            </td>
-                        </tr>
+                     </td>
+                     <td class="px-3 py-4 border-r-[1px]">
+                         {{ $item->status }}
+                     </td>
+                     <td class="px-3 py-4 border-r-[1px]">
+                         @foreach ($item->item as $item_in)
+                           <div>
+                             {{$item_in->name_product}} - Size: {{ $item_in->name }} (x{{ $item_in->quantity }})
+                           </div>
+                         @endforeach
+                     </td>
+                     <td class="px-3 py-4 border-r-[1px]">
+                         Họ và tên: {{ $item->full_name}}
+                         <br />
+                         <br />
+                         Số Điện thoại: {{ $item->phone }}
+                         <br />
+                         <br />
+                         Địa chỉ: {{ $item->address }}
+                     </td>
+                     <td class="px-3 py-4 border-r-[1px]">
+                         {{ $item->formatted_total_price }}
+                     </td>
+                     <td class="px-2 py-4 text-center">
+                         <button class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">HỦY ĐƠN</button>
+                     </td>
+                 </tr>
+                     @endforeach
                     </tbody>
                 </table>
             </div>

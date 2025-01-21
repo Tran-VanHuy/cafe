@@ -60,6 +60,7 @@ class OrderApiController extends Controller
             'province' => '',
             'address' => '',
             'agree' => false,
+            'status' => 'Đang xử lí',
             'user_id' => env('USER_ID')
         ]);
 
