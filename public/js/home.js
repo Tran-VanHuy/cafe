@@ -6187,9 +6187,13 @@ $(document).ready(function () {
   })));
   $("#info-sizes").on("click", ".info-size", function () {
     var data = $(this).data();
-    console.log("data", data.idsize);
-    $("#price-discount").text(data.formattedtotalprice);
-    $("#price").text(data.formattedprice);
+    if (data.formattedtotalprice == data.formattedprice) {
+      $("#price-discount").text(data.formattedtotalprice);
+      $("#price").text("");
+    } else {
+      $("#price-discount").text(data.formattedtotalprice);
+      $("#price").text(data.formattedprice);
+    }
     $(".info-size").removeClass("!bg-[#c59a65] !border-[#c59a65] text-white");
     $(this).addClass("!bg-[#c59a65] !border-[#c59a65] text-white");
     bodyProduct = _objectSpread(_objectSpread({}, bodyProduct), {}, {
@@ -6220,12 +6224,12 @@ $(document).ready(function () {
     }
   });
   $("#add-cart").click(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var body, res;
+    var body;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           if (!(product.type === 2)) {
-            _context2.next = 11;
+            _context2.next = 8;
             break;
           }
           if (bodyProduct.size_id) {
@@ -6241,18 +6245,20 @@ $(document).ready(function () {
             size_id: bodyProduct.size_id,
             quantity: bodyProduct.quantity,
             image: product.image,
-            name_size: bodyProduct.name_size,
-            user_id: "3"
+            name_size: bodyProduct.name_size
           });
-          _context2.next = 9;
-          return axios.post('/api/cart', body);
-        case 9:
-          res = _context2.sent;
-          if (res.data.status) {
+          axios.post('/api/cart', body).then(function (res) {
             toastr.success("Thêm giỏ hàng thành công...!");
-          }
-          // console.log(res);
-        case 11:
+          })["catch"](function (err) {
+            console.log(err);
+            if (err.status) {
+              toastr.error("Vui lòng đăng nhập để thêm giỏ hàng...!");
+              setTimeout(function () {
+                window.location.href = "/dang-nhap";
+              }, 1000);
+            }
+          });
+        case 8:
         case "end":
           return _context2.stop();
       }

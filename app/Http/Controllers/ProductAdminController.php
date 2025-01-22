@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
-
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ProductAdminController extends Controller
 {
@@ -17,6 +18,7 @@ class ProductAdminController extends Controller
     public function index()
     {
         //
+        $categories = Category::all();
         $product = Product::with('size')->get();
         $product = $product->map(function($item) {
             $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
@@ -24,7 +26,8 @@ class ProductAdminController extends Controller
             return $item;
         });
         return view('admin/products/product', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories,
         ]);
     }
 

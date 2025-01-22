@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ItemOrder;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -19,24 +21,30 @@ class OrderController extends Controller
         $show_header = 0;
         $show_footer = 1;
 
-        $order = Order::findOrFail($id);
-        $order->formatted_total_price = number_format($order->total_price, 0, ',', '.') . 'đ';
-        $item_order = ItemOrder::Where('order_id', $order->id)->get();
-        if($item_order) {
+        $order = Order::Where('id', $id)->Where('user_id', Auth::user()->id)->first();
+        if($order){
+            $order->formatted_total_price = number_format($order->total_price, 0, ',', '.') . 'đ';
+            $item_order = ItemOrder::Where('order_id', $order->id)->get();
+            if($item_order) {
+    
+                $item_order = $item_order->map(function($item) {
+                    $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
+                    return $item;
+                });
+            }
+    
+            // dd($order->toArray());
+            return view('order/order', [
+                'show_header' => $show_header,
+                'show_footer' => $show_footer,
+                'order' => $order,
+                'item_order' => $item_order,
+            ]);
+        } else {
 
-            $item_order = $item_order->map(function($item) {
-                $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
-                return $item;
-            });
+            return redirect()->route('home.index');
         }
-
-        // dd($order->toArray());
-        return view('order/order', [
-            'show_header' => $show_header,
-            'show_footer' => $show_footer,
-            'order' => $order,
-            'item_order' => $item_order,
-        ]);
+       
     }
     /**
      * Show the form for creating a new resource.

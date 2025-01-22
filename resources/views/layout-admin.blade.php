@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
-    <script src="{{ asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     @yield('static')
     <title>@yield('title')</title>
 
@@ -128,20 +128,23 @@
         </div>
         <div class="col-span-10 relative">
             <div class="px-[16px] h-[80px] bg-black bg-opacity-30 flex justify-end items-center">
-                <div class="rounded-full bg-[#8d5b80] flex gap-1 items-center pr-3 w-fit h-fit">
-                    <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
-                        <img src="{{ asset('/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png') }}"
-                            alt="" srcset="" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <p class="text-white text-[14px]">kphadmin</p>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white"
-                        class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg>
-                </div>
+                <form action="{{ route('logout.logout')}}" method="POST">
+                    @csrf
+                    <button class="rounded-full bg-[#8d5b80] flex gap-1 items-center pr-3 w-fit h-fit">
+                        <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
+                            <img src="{{ asset('/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png') }}"
+                                alt="" srcset="" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="text-white text-[14px]">{{ Auth::user()->name }}</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white"
+                            class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </button>
+                </form>
             </div>
             @yield('content')
         </div>

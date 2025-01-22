@@ -14,6 +14,9 @@
     <script src="{{ asset('js/app.js')}}"></script>
     @yield('static')
     <title>@yield('title')</title>
+    <script>
+        let token = '{{ session('api_token') }}';
+    </script>
 </head>
 
 <body>

@@ -70,7 +70,6 @@ $(document).ready(function() {
         const res = await axios.post('/api/voucher', {
             code: value
         })
-        console.log(res);
         
         if(!res?.data?.data) {
 
@@ -92,7 +91,6 @@ $(document).ready(function() {
        const body = {...priceTotalProduct(), voucher_code}
         
         const res = await axios.post('/api/order', body)
-        console.log(res);
         
         if(res?.data.status === 200){
 

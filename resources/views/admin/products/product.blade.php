@@ -124,7 +124,7 @@
             <span class="sr-only">Close menu</span>
         </button>
         <div>
-            <form id="form-product">
+            <form id="submit-product" enctype="multipart/form-data">
                 <div class="grid grid-cols-2 gap-2 mb-5">
                     <div class="col-span-1">
                         <div>
@@ -132,14 +132,14 @@
                                 sản phẩm</label>
                             <input type="text" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Tên sản phẩm"  required/>
+                                placeholder="Tên sản phẩm" required />
                         </div>
                     </div>
                     <div class="col-span-1">
                         <div>
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giá
                                 tiền (VNĐ)</label>
-                            <input type="text" id="price" placeholder="Giá sản phẩm"
+                            <input type="number" id="price" placeholder="Giá sản phẩm"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required />
                         </div>
@@ -173,6 +173,18 @@
                                 required />
                         </div>
                     </div>
+                    <div class="col-span-1">
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Danh mục</label>
+                        <select id="category"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            required>
+
+                            <option value="" selected>Chọn danh mục</option>
+                            @foreach ($categories as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mb-2 items-center">
                     <div class="col-span-1">
@@ -180,7 +192,7 @@
                             <label for="info"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thông tin</label>
                             <input type="text" id="info" placeholder="VD: SIZE"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
                         </div>
                     </div>
                     <div class="col-span-1 mt-7">
@@ -220,7 +232,7 @@
                                         class="font-semibold">Ảnh (Trang chủ)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG</p>
                             </div>
-                            <input id="dropzone-file1" type="file" class="hidden" />
+                            <input id="dropzone-file1" name="dropzone-file1" type="file" class="hidden" />
                             <div class="absolute top-0 left-0 right-0 bottom-0">
                                 <img src="" id="upload-result1" class="w-full h-full" hidden />
                             </div>
@@ -240,7 +252,7 @@
                                         class="font-semibold">Ảnh (Chi tiết)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG</p>
                             </div>
-                            <input id="dropzone-file2" type="file" class="hidden" required/>
+                            <input id="dropzone-file2" name="dropzone-file2" type="file" class="hidden" />
                             <div class="absolute top-0 left-0 right-0 bottom-0">
                                 <img src="" id="upload-result2" class="w-full h-full" hidden />
                             </div>
@@ -260,7 +272,7 @@
                                         class="font-semibold">Ảnh (Chi tiết)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG</p>
                             </div>
-                            <input id="dropzone-file3" type="file" class="hidden" required/>
+                            <input id="dropzone-file3" name="dropzone-file3" type="file" class="hidden" />
                             <div class="absolute top-0 left-0 right-0 bottom-0">
                                 <img src="" id="upload-result3" class="w-full h-full" hidden />
                             </div>
@@ -280,7 +292,7 @@
                                         class="font-semibold">Ảnh (Chi tiết)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG</p>
                             </div>
-                            <input id="dropzone-file4" type="file" class="hidden" required/>
+                            <input id="dropzone-file4" name="dropzone-file4" type="file" class="hidden" />
                             <div class="absolute top-0 left-0 right-0 bottom-0">
                                 <img src="" id="upload-result4" class="w-full h-full" hidden />
                             </div>
@@ -300,7 +312,7 @@
                                         class="font-semibold">Ảnh (Chi tiết)</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG</p>
                             </div>
-                            <input id="dropzone-file5" type="file" class="hidden" required/>
+                            <input id="dropzone-file5" name="dropzone-file5" type="file" class="hidden" />
                             <div class="absolute top-0 left-0 right-0 bottom-0">
                                 <img src="" id="upload-result5" class="w-full h-full" hidden />
                             </div>
@@ -310,7 +322,7 @@
                 <div class="flex gap-2 justify-end">
                     <button data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
                         class="mt-3 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Hủy</button>
-                    <button type="submit" id="submit-product"
+                    <button type="submit"
                         class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cập
                         nhật</button>
                 </div>

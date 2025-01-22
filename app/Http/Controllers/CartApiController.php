@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
+
 
 class CartApiController extends Controller
 {
@@ -48,7 +50,7 @@ class CartApiController extends Controller
             'quantity' => $validated['quantity'],
             'image' => $request->image,
             'name_size' => $request->name_size,
-            'user_id' => $request->user_id
+            'user_id' => Auth::user()->id
         ]);
         return response()->json([
             "status" => 200,

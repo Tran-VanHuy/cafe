@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemOrder;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderInfoController extends Controller
 {
@@ -13,10 +14,10 @@ class OrderInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        $order = Order::with('item')->Where('user_id', env('USER_ID'))->orderBy('id', 'desc')->get();
+        $order = Order::with('item')->Where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         $order = $order->map(function($item) {
             $item->formatted_total_price = number_format($item->total_price, 0, ',', '.') . 'đ';
             return $item;

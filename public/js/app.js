@@ -10,12 +10,17 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PRODUCT_API: () => (/* binding */ PRODUCT_API),
 /* harmony export */   formatted_price: () => (/* binding */ formatted_price)
 /* harmony export */ });
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var formatted_price = function formatted_price(val) {
   var formattedNumber = new Intl.NumberFormat('vi-VN').format(val) + 'đ';
   return formattedNumber;
+};
+var PRODUCT_API = {
+  CREATE: '/api/product',
+  SIZE: "/api/product/size"
 };
 
 /***/ }),

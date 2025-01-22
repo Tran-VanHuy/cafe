@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartApiController;
 use App\Http\Controllers\VoucherApiController;
 use App\Http\Controllers\OrderApiController;
+use App\Http\Controllers\SizeApiController;
+
 
 
 
@@ -25,9 +27,14 @@ use App\Http\Controllers\OrderApiController;
 //     return $request->user();
 // });
 
-Route::get('/product/{id}', [ProductController::class, 'show']);
+Route::prefix("product")->group(function() {
 
-Route::prefix('cart')->group(function() {
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::post('', [ProductController::class, 'create']);
+    Route::get('/size/{id}', [SizeApiController::class, 'info_size'])->name('size.info_size');
+});
+
+Route::prefix('cart')->middleware('auth')->group(function() {
 
     Route::post('', [CartApiController::class, 'store']);
 

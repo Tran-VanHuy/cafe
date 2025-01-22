@@ -2,7 +2,7 @@
 @section('title', 'Đặt hàng')
 @section('content')
     <div class="py-[50px] px-[120px] ">
-     <form action="{{ route('order.update', $order->id) }}" method="post">
+     <form action="{{ route('order.update') }}" method="post">
         @csrf
         @method('PUT')
         <div class="grid grid-cols-12">

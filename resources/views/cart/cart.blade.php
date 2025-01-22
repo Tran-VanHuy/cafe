@@ -74,7 +74,10 @@
                        {{ $item->formatted_total_price }}
                     </td>
                     <td class="px-6 py-4">
-                        <button class="bg-[#d73747] px-3 text-white h-[30px] rounded font-[400]">XÓA</button>
+                        <form action="{{ route('cart.destroy', ['id' => $item->id]) }}" method="post">
+                            @csrf
+                            <button class="bg-[#d73747] px-3 text-white h-[30px] rounded font-[400]">XÓA</button>
+                        </form>
                     </td>
                 </tr>
                     @endforeach

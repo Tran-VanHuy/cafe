@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Voucher;
 use App\Models\ItemOrder;
+use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class OrderApiController extends Controller
             'address' => '',
             'agree' => false,
             'status' => 'Đang xử lí',
-            'user_id' => env('USER_ID')
+            'user_id' => Auth::user()->id
         ]);
 
         $order_id = $order->id;

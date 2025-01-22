@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -16,13 +18,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        
         $categories = Category::all();
         $products = Product::all();
-        $carts = Cart::with('size')->get();
-
         $count_cart = 0;
-        $total_all_price = 0;
+        $total_all_price = number_format(0, 0, ',', '.') . 'đ';
+        if(Auth::check()){
+            $carts = Cart::with('size')->Where('user_id', Auth::user()->id)->get();
+              
         if($carts){
             $count_cart = $carts->count();
             $carts = $carts->map(function($item) {
@@ -34,10 +37,11 @@ class HomeController extends Controller
             $total_all_price = $carts->sum('total_price');
             if($total_all_price > 0){
                 $total_all_price = number_format($total_all_price, 0, ',', '.') . 'đ';
+            } else {
+                $total_all_price = number_format(0, 0, ',', '.') . 'đ';
             }
-
         }
-      
+        }
         $products = $products->map(function($item){
 
             $item->format_price= number_format($item->price, 0, ',', '.') . 'đ';

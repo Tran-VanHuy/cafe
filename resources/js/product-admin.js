@@ -1,11 +1,11 @@
+const { default: axios } = require("axios");
+const { PRODUCT_API } = require("./app");
+
 $(document).ready(function () {
 
     $("#edit").click(function () {
 
-        const action = $(this).closest('.action')
         $("#title-drawer").text("Chỉnh sửa")
-        console.log(action.data('data'));
-
     })
 
     $("#create-product").click(function () {
@@ -23,14 +23,31 @@ $(document).ready(function () {
             id: 0,
             name: '',
             price: '',
-            discount_percent: '',
-            discount_money: '',
+            discount_percent: 0,
+            discount_money: 0,
             quantity: 1,
         })
-        dataInfo.map(item => {
+        const itemInfo = $(".item-info").map(function () {
+            return {
+                name: $(this).find('.info-name').val(),
+                price: $(this).find('#info-price').val(),
+                discount_percent: $(this).find('#info-price-percent').val(),
+                discount_money: $(this).find('#info-price-money').val(),
+                quantity: $(this).find('#info-quantity').val(),
+                index: $(this).find("#index-item-info").val(),
+            };
+        }).get();
+        const checkExit = dataInfo.map(item => {
+
+            const find = itemInfo.find(item_in => item_in.index == item.index)
+            return find ? find : item
+        })
+
+        checkExit.map(item => {
 
             itemInfoHtml += `
               <div class="grid grid-cols-12 gap-2 mb-5 items-center item-info">
+                        <input type="number" id="index-item-info" value="${item.index}" hidden/>
                         <div class="col-span-3">
                             <div>
                                 <label for="info-name"
@@ -84,8 +101,9 @@ $(document).ready(function () {
                         </div>
                     </div>
             `
-        })
 
+        })
+        dataInfo = checkExit
         $("#item-info").html(itemInfoHtml).addClass("border-[1px]")
     })
 
@@ -96,6 +114,7 @@ $(document).ready(function () {
         let itemInfoHtml = ``
 
         const data = dataInfo.filter(item => item.index != index)
+
         if (data && data.length > 0) {
             dataInfo = data
             dataInfo.map(item => {
@@ -165,38 +184,73 @@ $(document).ready(function () {
         }
     })
 
-    $("#submit-product").click(function() {
+    let image1 = "";
+    let image2 = "";
+    let image3 = "";
+    let image4 = "";
+    let image5 = "";
 
-        // const form = $('#form-product')[0];
-        console.log("vào đay");
-        
-        // if(form.checkValidity()){
+    $("#submit-product").submit(function (event) {
+        event.preventDefault();
 
-            const nameProduct = $("#name").val();
-            const priceProduct = $("#price").val();
-            const discountPercent = $("#discount_percent").val();
-            const discountMoney = $("#discount_money").val();
-            const quantity = $("#quantity").val()
-            const info = $("#info").val()
-            const itemInfo = $(".item-info").map(function () {
-                return {
-                    nameItem: $(this).find('.info-name').val(),
-                    price: $(this).find('#info-price').val(),
-                    discountPercent: $(this).find('#info-price-percent').val(),
-                    discountMoney: $(this).find('#info-price-money').val(),
-                    quantity: $(this).find('#info-quantity').val()
-                };
-            }).get(); 
-            
-            console.log({nameProduct, priceProduct, discountPercent, discountMoney, quantity, info, itemInfo});
-            
+        const nameProduct = $("#name").val();
+        const priceProduct = $("#price").val();
+        const discountPercent = $("#discount_percent").val();
+        const discountMoney = $("#discount_money").val();
+        const quantity = $("#quantity").val()
+        const info = $("#info").val()
+        const itemInfo = $(".item-info").map(function () {
+            return {
+                nameItem: $(this).find('.info-name').val(),
+                price: $(this).find('#info-price').val(),
+                discountPercent: $(this).find('#info-price-percent').val(),
+                discountMoney: $(this).find('#info-price-money').val(),
+                quantity: $(this).find('#info-quantity').val()
+            };
+        }).get();
+        const content = $("#content").val()
 
+        const body = {
 
-        // } else {
+            image: image1,
+            image1: image2,
+            image2: image3,
+            image3: image4,
+            image4: image5,
+            name: nameProduct,
+            price: priceProduct,
+            discount_percent: discountPercent,
+            discount_money: discountMoney,
+            quantity,
+            name_size: info,
+            content,
+            category: $("#category").val(),
+            itemInfo: itemInfo.map(item => ({
+                name: item.nameItem,
+                price: item.price,
+                discount_percent: item.discountPercent,
+                discount_money: item.discountMoney,
+                quantity: item.quantity
+            }))
+        }
 
-        //     form.reportValidity();
-        // }
+        if (!body.name || !body.price || !body.quantity || !image1 || !image2 || !image3 || !image4 || !image5) {
+
+            return;
+        } else {
+            axios.post(PRODUCT_API.CREATE, body)
+                .then(res => {
+
+                    window.location.reload()
+                })
+                .catch(err => {
+
+                    console.log({ err });
+                })
+        }
     })
+
+
 
     $('#dropzone-file1').on('change', function () {
         const file = this.files[0];
@@ -215,14 +269,15 @@ $(document).ready(function () {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {
-            
-            $('#upload-result1').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
-            $('#upload-file-1').attr('hidden', true)
-        })
-        .catch(error => {
-            toastr.error("Không thành công...!")
-        });
+            .then(response => {
+
+                $('#upload-result1').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+                image1 = response.data.data.file_path;
+
+            })
+            .catch(error => {
+                toastr.error("Không thành công...!")
+            });
     });
 
     $('#dropzone-file2').on('change', function () {
@@ -243,13 +298,15 @@ $(document).ready(function () {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {
-            
-            $('#upload-result2').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
-        })
-        .catch(error => {
-            toastr.error("Không thành công...!")
-        });
+            .then(response => {
+
+                $('#upload-result2').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+                image2 = response.data.data.file_path;
+
+            })
+            .catch(error => {
+                toastr.error("Không thành công...!")
+            });
     });
 
     $('#dropzone-file3').on('change', function () {
@@ -269,13 +326,15 @@ $(document).ready(function () {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {
-            
-            $('#upload-result3').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
-        })
-        .catch(error => {
-            toastr.error("Không thành công...!")
-        });
+            .then(response => {
+
+                $('#upload-result3').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+                image3 = response.data.data.file_path;
+
+            })
+            .catch(error => {
+                toastr.error("Không thành công...!")
+            });
     });
 
     $('#dropzone-file4').on('change', function () {
@@ -295,13 +354,14 @@ $(document).ready(function () {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {
-            
-            $('#upload-result4').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
-        })
-        .catch(error => {
-            toastr.error("Không thành công...!")
-        });
+            .then(response => {
+
+                $('#upload-result4').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+                image4 = response.data.data.file_path;
+            })
+            .catch(error => {
+                toastr.error("Không thành công...!")
+            });
     });
 
     $('#dropzone-file5').on('change', function () {
@@ -321,11 +381,12 @@ $(document).ready(function () {
                 'Content-Type': 'multipart/form-data',
             },
         })
-        .then(response => {            
-            $('#upload-result5').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
-        })
-        .catch(error => {
-            toastr.error("Không thành công...!")
-        });
+            .then(response => {
+                $('#upload-result5').attr('src', `/${response.data.data.file_path}`).attr('hidden', false);
+                image5 = response.data.data.file_path;
+            })
+            .catch(error => {
+                toastr.error("Không thành công...!")
+            });
     });
 })

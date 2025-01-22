@@ -10,12 +10,17 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PRODUCT_API: () => (/* binding */ PRODUCT_API),
 /* harmony export */   formatted_price: () => (/* binding */ formatted_price)
 /* harmony export */ });
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var formatted_price = function formatted_price(val) {
   var formattedNumber = new Intl.NumberFormat('vi-VN').format(val) + 'đ';
   return formattedNumber;
+};
+var PRODUCT_API = {
+  CREATE: '/api/product',
+  SIZE: "/api/product/size"
 };
 
 /***/ }),
@@ -28198,7 +28203,6 @@ $(document).ready(function () {
           });
         case 4:
           res = _context.sent;
-          console.log(res);
           if (!(res !== null && res !== void 0 && (_res$data = res.data) !== null && _res$data !== void 0 && _res$data.data)) {
             toastr.error("Opps m\xE3 Voucher kh\xF4ng h\u1EE3p l\u1EC7...!");
             total = priceTotalProduct().total;
@@ -28210,7 +28214,7 @@ $(document).ready(function () {
             $("#total-price-cart").text((0,_app__WEBPACK_IMPORTED_MODULE_0__.formatted_price)(_total));
             priceVoucher = res.data.data.price;
           }
-        case 7:
+        case 6:
         case "end":
           return _context.stop();
       }
@@ -28228,11 +28232,10 @@ $(document).ready(function () {
           return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/order', body);
         case 3:
           res = _context2.sent;
-          console.log(res);
           if ((res === null || res === void 0 ? void 0 : res.data.status) === 200) {
             window.location.href = "/dat-hang/".concat(res.data.data);
           }
-        case 6:
+        case 5:
         case "end":
           return _context2.stop();
       }

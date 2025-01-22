@@ -1175,6 +1175,9 @@ input:checked + .toggle-bg {
 .mt-7 {
   margin-top: 1.75rem;
 }
+.mb-\[8px\] {
+  margin-bottom: 8px;
+}
 .block {
   display: block;
 }
@@ -1540,9 +1543,6 @@ input:checked + .toggle-bg {
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-}
-.\!border-\[1px\] {
-  border-width: 1px !important;
 }
 .border {
   border-width: 1px;

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Admin',
-                'email' => 'admin@example.com', // Địa chỉ email admin
+                'email' => 'admin@gmail.com', // Địa chỉ email admin
                 'role' => 'ADMIN',
                 'password' => Hash::make('admin'), // Mật khẩu mã hóa
                 'created_at' => now(),

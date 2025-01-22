@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,7 +18,7 @@ class CartController extends Controller
         //
         $show_header = 0;
         $show_footer = 1;
-        $carts = Cart::with('size')->get();
+        $carts = Cart::with('size')->Where('user_id', Auth::user()->id)->get();
         $total_all_price = 0;
         $shipping_price = 0;
         $formatted_shipping_price = number_format($shipping_price, 0, ',', '.') . 'đ';
@@ -113,5 +113,8 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+        $cart = Cart::findOrFail($id); // Tìm cart theo id
+        $cart->delete(); // Xóa cart
+        return redirect()->route('cart.index');
     }
 }

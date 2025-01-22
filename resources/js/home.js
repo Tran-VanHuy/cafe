@@ -57,10 +57,14 @@ $(document).ready(function () {
     $("#info-sizes").on("click", ".info-size", function () {
 
         const data = $(this).data()
-        console.log("data", data.idsize);
         
-        $("#price-discount").text(data.formattedtotalprice)
-        $("#price").text(data.formattedprice)
+        if(data.formattedtotalprice == data.formattedprice){
+            $("#price-discount").text(data.formattedtotalprice)
+            $("#price").text("")
+        } else {
+            $("#price-discount").text(data.formattedtotalprice)
+            $("#price").text(data.formattedprice)
+        }
 
         $(".info-size").removeClass("!bg-[#c59a65] !border-[#c59a65] text-white")
         $(this).addClass("!bg-[#c59a65] !border-[#c59a65] text-white")
@@ -90,7 +94,7 @@ $(document).ready(function () {
     })
 
     $("#add-cart").click(async function() {
-
+        
         if(product.type === 2){
 
             if(!bodyProduct.size_id){
@@ -106,15 +110,21 @@ $(document).ready(function () {
                     quantity: bodyProduct.quantity,
                     image: product.image,
                     name_size: bodyProduct.name_size,
-                    user_id: USER_ID
                 }
                 
-                const res = await axios.post('/api/cart', body)
-                if(res.data.status) {
-
+                 axios.post('/api/cart', body).then(res => {
                     toastr.success("Thêm giỏ hàng thành công...!")
-                }
-                // console.log(res);
+                 }).catch(err => {
+                    console.log(err);
+                    if(err.status){
+                        toastr.error("Vui lòng đăng nhập để thêm giỏ hàng...!")
+                        setTimeout(() => {
+                            window.location.href = "/dang-nhap"
+                        }, 1000)
+                    }
+
+                 })
+        
                 
             }
         }
