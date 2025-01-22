@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemOrder;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -11,17 +15,37 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
         $show_header = 0;
         $show_footer = 1;
-        return view('order/order', [
-            'show_header' => $show_header,
-            'show_footer' => $show_footer
-        ]);
-    }
 
+        $order = Order::Where('id', $id)->Where('user_id', Auth::user()->id)->first();
+        if($order){
+            $order->formatted_total_price = number_format($order->total_price, 0, ',', '.') . 'đ';
+            $item_order = ItemOrder::Where('order_id', $order->id)->get();
+            if($item_order) {
+    
+                $item_order = $item_order->map(function($item) {
+                    $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
+                    return $item;
+                });
+            }
+    
+            // dd($order->toArray());
+            return view('order/order', [
+                'show_header' => $show_header,
+                'show_footer' => $show_footer,
+                'order' => $order,
+                'item_order' => $item_order,
+            ]);
+        } else {
+
+            return redirect()->route('home.index');
+        }
+       
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +65,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        echo "vòa đay";
     }
 
     /**
@@ -75,6 +100,17 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $order = Order::findOrFail($id);
+        $order->update([
+            'full_name' => $request->full_name,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'province' => $request->province,
+            'address' => $request->address,
+            'agree' => true
+        ]);
+
+        return redirect()->route('info-order.index', $order->id);
     }
 
     /**

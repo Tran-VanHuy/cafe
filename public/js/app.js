@@ -5,9 +5,23 @@
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PRODUCT_API: () => (/* binding */ PRODUCT_API),
+/* harmony export */   formatted_price: () => (/* binding */ formatted_price)
+/* harmony export */ });
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+var formatted_price = function formatted_price(val) {
+  var formattedNumber = new Intl.NumberFormat('vi-VN').format(val) + 'đ';
+  return formattedNumber;
+};
+var PRODUCT_API = {
+  CREATE: '/api/product',
+  SIZE: "/api/product/size"
+};
 
 /***/ }),
 
@@ -23334,6 +23348,18 @@ module.exports = axios;
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
 /******/ 		};
 /******/ 	})();
 /******/ 	
