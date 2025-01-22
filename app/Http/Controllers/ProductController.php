@@ -45,7 +45,7 @@ class ProductController extends Controller
             "discount_percent" => $request->discount_percent,
             "discount_money" =>  $request->discount_money,
             "quantity" => $request->quantity,
-            "name_size"=> $request->name_size,
+            "name_size" => $request->name_size,
             "content"=> $request->content
         ]);
 

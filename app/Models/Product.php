@@ -19,7 +19,8 @@ class Product extends Model
       'discount_percent',
       'discount_money',
       'quantity',
-      'content'
+      'content',
+      'name_size'
    ];
 
    public function size() {
