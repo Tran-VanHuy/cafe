@@ -1148,6 +1148,9 @@ input:checked + .toggle-bg {
 .mb-\[5px\] {
   margin-bottom: 5px;
 }
+.mb-\[8px\] {
+  margin-bottom: 8px;
+}
 .me-2 {
   margin-inline-end: 0.5rem;
 }
@@ -1174,9 +1177,6 @@ input:checked + .toggle-bg {
 }
 .mt-7 {
   margin-top: 1.75rem;
-}
-.mb-\[8px\] {
-  margin-bottom: 8px;
 }
 .block {
   display: block;
