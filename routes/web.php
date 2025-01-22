@@ -35,7 +35,6 @@ Route::prefix('gio-hang')->middleware('auth')->group(function() {
 
     Route::get('', [CartController::class, 'index'])->name('cart.index');
     Route::post('/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-
 });
 Route::prefix('/dat-hang')->group(function() {
     Route::get('/{id}', [OrderController::class, 'index'])->name('order.index');
@@ -44,7 +43,7 @@ Route::prefix('/dat-hang')->group(function() {
 });
 Route::get('/thong-tin-dat-hang', [OrderInfoController::class, 'index'])->middleware('auth')->name('info-order.index');
 Route::prefix('/admin')->middleware(['admin'])->group(function() {
-    Route::get('/bieu-do', [StatisticalAdminController::class, 'index']);
+    Route::get('/bieu-do', [StatisticalAdminController::class, 'index'])->name('chart-admin.index');
     Route::get('/san-pham', [ProductAdminController::class, 'index'])->name('product-admin.index');
 });
 

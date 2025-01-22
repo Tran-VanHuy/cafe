@@ -40,7 +40,11 @@ class Login extends Controller
 
             // Lưu token vào session (có thể sử dụng trong frontend hoặc mobile app)
             session(['api_token' => $token]);
-            return redirect()->intended('/');
+            if($user->role == "ADMIN"){
+                return redirect()->route('chart-admin.index');
+            } else {
+                return redirect()->route('home.index');
+            }
         }
         return back()->withErrors([
             'error' => 'Sai thông tin tài khoản hoặc mật khẩu.',
