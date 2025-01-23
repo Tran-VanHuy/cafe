@@ -28164,6 +28164,36 @@ $(document).ready(function () {
     // Gọi hàm tính tổng giá trị của giỏ hàng
     priceTotalProduct();
   });
+  $(".dash-quantity").on('click', function () {
+    var tr = $(this).closest('tr');
+    var quantityProduct = tr.find('.quantity-product');
+    var valueQuantity = Number(quantityProduct.text()) - 1 === 0 ? 1 : Number(quantityProduct.text()) - 1;
+    var data = tr.data('data'); // Lấy data từ tr
+
+    // Cập nhật lại số lượng
+    tr.find('.quantity-product').text(valueQuantity);
+
+    // Cập nhật đối tượng data với số lượng mới và tính lại giá trị
+    var updateData = _objectSpread(_objectSpread({}, data), {}, {
+      quantity: valueQuantity,
+      // Cập nhật lại quantity
+      price_product: data.total_price * valueQuantity // Cập nhật lại price_product
+    });
+
+    // Định dạng lại giá sản phẩm
+    var price = (0,_app__WEBPACK_IMPORTED_MODULE_0__.formatted_price)(updateData.price_product);
+
+    // Cập nhật lại giá hiển thị
+    tr.find('.total-price').text(price);
+
+    // Cập nhật lại data vào data-data của tr
+    tr.attr('data-data', JSON.stringify(updateData));
+    tr.data('data', updateData);
+    // console.log($(this).closest('tr').data('data'));
+
+    // Gọi hàm tính tổng giá trị của giỏ hàng
+    priceTotalProduct();
+  });
 
   // Hàm tính tổng giá trị của tất cả các sản phẩm trong giỏ hàng
   function priceTotalProduct() {

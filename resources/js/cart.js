@@ -38,6 +38,38 @@ $(document).ready(function() {
         // Gọi hàm tính tổng giá trị của giỏ hàng
         priceTotalProduct();
     });
+
+    $(".dash-quantity").on('click', function() {
+        const tr = $(this).closest('tr');
+        const quantityProduct = tr.find('.quantity-product');
+        const valueQuantity = Number(quantityProduct.text()) - 1 === 0 ? 1 : Number(quantityProduct.text()) - 1;
+    
+        const data = tr.data('data');  // Lấy data từ tr
+    
+        // Cập nhật lại số lượng
+        tr.find('.quantity-product').text(valueQuantity);
+    
+        // Cập nhật đối tượng data với số lượng mới và tính lại giá trị
+        const updateData = {
+            ...data,
+            quantity: valueQuantity,  // Cập nhật lại quantity
+            price_product: data.total_price * valueQuantity  // Cập nhật lại price_product
+        };
+    
+        // Định dạng lại giá sản phẩm
+        const price = formatted_price(updateData.price_product);
+    
+        // Cập nhật lại giá hiển thị
+        tr.find('.total-price').text(price);
+    
+        // Cập nhật lại data vào data-data của tr
+        tr.attr('data-data', JSON.stringify(updateData));
+        tr.data('data', updateData);
+        // console.log($(this).closest('tr').data('data'));
+        
+        // Gọi hàm tính tổng giá trị của giỏ hàng
+        priceTotalProduct();
+    });
     
     // Hàm tính tổng giá trị của tất cả các sản phẩm trong giỏ hàng
     function priceTotalProduct() {

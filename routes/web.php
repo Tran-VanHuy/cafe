@@ -41,10 +41,15 @@ Route::prefix('/dat-hang')->group(function() {
     Route::post('', [OrderController::class, 'store'])->name('order.store');
     Route::put('/{id}', [OrderController::class, 'update'])->name('order.update');
 });
-Route::get('/thong-tin-dat-hang', [OrderInfoController::class, 'index'])->middleware('auth')->name('info-order.index');
+Route::prefix('thong-tin-dat-hang')->middleware('auth')->group(function(){
+
+    Route::get('', [OrderInfoController::class, 'index'])->middleware('auth')->name('info-order.index');
+    Route::post('/{id}', [OrderInfoController::class, 'destroy'])->middleware('auth')->name('info-order.destroy');
+});
 Route::prefix('/admin')->middleware(['admin'])->group(function() {
     Route::get('/bieu-do', [StatisticalAdminController::class, 'index'])->name('chart-admin.index');
     Route::get('/san-pham', [ProductAdminController::class, 'index'])->name('product-admin.index');
+    Route::post('/san-pham/{id}', [ProductAdminController::class, 'destroy'])->name('product-admin.destroy');
 });
 
 
