@@ -51,7 +51,7 @@
                         </a>
                     </div>
                     <div class="px-[16px] py-[22px] border-b-[1px] border-gray-500">
-                        <a href="{{ route('product-admin.index') }}" class="text-white flex items-center gap-2 ">
+                        <a href="#" class="text-white flex items-center gap-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white"
                                 class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
                                 <path
@@ -63,7 +63,7 @@
                         </a>
                     </div>
                     <div class="px-[16px] py-[22px] border-b-[1px] border-gray-500">
-                        <a href="#" class="text-white flex items-center gap-2 ">
+                        <a href="{{ route('product-admin.index') }}" class="text-white flex items-center gap-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white"
                                 class="bi bi-bag-fill" viewBox="0 0 16 16">
                                 <path

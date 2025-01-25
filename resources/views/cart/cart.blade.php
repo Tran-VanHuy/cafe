@@ -51,7 +51,7 @@
                         <div class="w-fit">
                             <div class="flex items-center mr-1">
                                 <div
-                                    class="px-1 h-[30px] w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
+                                    class="dash-quantity px-1 h-[30px] w-[35px] flex items-center justify-center bg-[#f6f6f6] cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
                                         class="bi bi-dash" viewBox="0 0 16 16">
                                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
@@ -74,7 +74,7 @@
                        {{ $item->formatted_total_price }}
                     </td>
                     <td class="px-6 py-4">
-                        <form action="{{ route('cart.destroy', ['id' => $item->id]) }}" method="post">
+                        <form action="{{ route('product-admin.destroy', ['id' => $item->id]) }}" method="post">
                             @csrf
                             <button class="bg-[#d73747] px-3 text-white h-[30px] rounded font-[400]">XÓA</button>
                         </form>

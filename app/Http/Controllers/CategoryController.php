@@ -15,11 +15,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $categories = Category::all();
-        $products = Product::all();
+        if($request->query('category')){
+            $products = Product::Where('category_id', $request->query('category'))->get();
+        } else {
+            $products = Product::all();
+
+        }
         $carts = Cart::with('size')->get();
 
         $count_cart = 0;
@@ -53,7 +58,8 @@ class CategoryController extends Controller
             'categories' => $categories,
             'products' => $products,
             'count_cart' => $count_cart,
-            'total_all_price' => $total_all_price
+            'total_all_price' => $total_all_price,
+            'category' => $request->query('category')
         ]);
     }
 

@@ -80,7 +80,10 @@
                          {{ $item->formatted_total_price }}
                      </td>
                      <td class="px-2 py-4 text-center">
-                         <button class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">HỦY ĐƠN</button>
+                        <form action="{{ route('info-order.destroy', ['id' => $item->id]) }}" method="post">
+                            @csrf
+                            <button class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">HỦY ĐƠN</button>
+                        </form>
                      </td>
                  </tr>
                      @endforeach

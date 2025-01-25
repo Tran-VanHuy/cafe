@@ -96,5 +96,9 @@ class OrderInfoController extends Controller
     public function destroy($id)
     {
         //
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('info-order.index');
     }
 }

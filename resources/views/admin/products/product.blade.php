@@ -41,8 +41,8 @@
                             <th scope="col" class="px-3 py-3 border-r-[1px] border-white">
                                 Tên (Size)
                             </th>
-                            {{-- <th scope="col" class="px-3 py-3">
-                            </th> --}}
+                            <th scope="col" class="px-3 py-3">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,20 +80,23 @@
                                 <td class="px-3 py-4 border-r-[1px]">
                                     {{ $item->name_size }}
                                 </td>
-                                {{-- <td class="py-2 text-center action" data-data="{{ $item->id }}">
-                                    <button
+                                <td class="py-2 text-center action" data-data="{{ $item->id }}">
+                                    {{-- <button
                                         class="bg-[#4db6ac] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap"
                                         data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
                                         data-drawer-placement="right" aria-controls="drawer-right-example"
-                                        id="edit">Sửa</button>
-                                    <button
+                                        id="edit">Sửa</button> --}}
+                                    {{-- <button
                                         class="bg-[#b2b353] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap"
                                         data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
                                         data-drawer-placement="right" aria-controls="drawer-right-example">Chi
-                                        tiết</button>
-                                    <button
-                                        class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">Xóa</button>
-                                </td> --}}
+                                        tiết</button> --}}
+                                    <form action="{{ route('product-admin.destroy', ['id' => $item->id]) }}" method="post">
+                                        @csrf
+                                        <button
+                                            class="bg-[#d73747] px-3 text-white h-[35px] rounded font-[400] text-nowrap whitespace-nowrap">Xóa</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -174,7 +177,8 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Danh mục</label>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Danh
+                            mục</label>
                         <select id="category"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required>
@@ -192,7 +196,8 @@
                             <label for="info"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thông tin</label>
                             <input type="text" id="info" placeholder="VD: SIZE"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required />
                         </div>
                     </div>
                     <div class="col-span-1 mt-7">

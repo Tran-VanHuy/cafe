@@ -19,7 +19,7 @@ class ProductAdminController extends Controller
     {
         //
         $categories = Category::all();
-        $product = Product::with('size')->get();
+        $product = Product::with('size')->orderBy('id', 'desc')->get();
         $product = $product->map(function($item) {
             $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
             $item->formatted_discount_money = number_format($item->discount_money, 0, ',', '.') . 'đ';
@@ -95,5 +95,8 @@ class ProductAdminController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('product-admin.index');
     }
 }

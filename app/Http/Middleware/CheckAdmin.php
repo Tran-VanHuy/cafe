@@ -21,6 +21,6 @@ class CheckAdmin
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'You do not have access to the admin page.');
+        return redirect()->route('login.index');
     }
 }
