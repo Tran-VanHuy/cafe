@@ -41,18 +41,33 @@
                     </div>
                     <div class="text-[40px] text-white text-center">hoặc</div>
                 </div>
-                <div>
-                    <div class="mb-[10px]">
-                        <p class="text-[16px] text-white font-bold mb-[10px]">Tài khoản</p>
-                        <input type="text" class="h-[65px] w-full bg-white rounded px-[16px] border-none">
+                <form action="{{ route('login.authenticate') }}" method="post">
+                    @csrf
+                    @method('POST')
+                    <div>
+                        <div class="mb-[10px]">
+                            <p class="text-[16px] text-white font-bold mb-[10px]">Tài khoản</p>
+                            <input type="text" name="email"
+                                class="h-[65px] w-full bg-white rounded px-[16px] border-none"
+                                placeholder="Nhập email của bạn" required>
+                        </div>
+                        <div class="mb-[8px]">
+                            <p class="text-[16px] text-white font-bold mb-[10px]">Mật khẩu <a href="#"
+                                    class="text-[14px] font-[500] ml-1">Quên?</a></p>
+                            <input type="password" name="password"
+                                class="h-[65px] w-full bg-white rounded px-[16px] border-none" required>
+                        </div>
+                        <div class="text-[14px] text-red-500 mb-[16px] font-[600]">
+                            @if ($errors->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('error') }}
+                                </div>
+                            @endif
+                        </div>
+                        <button type="submit" class="w-full h-[55px] text-white bg-[#333333] font-bold rounded-xl">Đăng
+                            nhập</button>
                     </div>
-                    <div class="mb-[16px]">
-                        <p class="text-[16px] text-white font-bold mb-[10px]">Mật khẩu <a href="#"
-                                class="text-[14px] font-[500] ml-1">Quên?</a></p>
-                        <input type="password" class="h-[65px] w-full bg-white rounded px-[16px] border-none">
-                    </div>
-                    <button class="w-full h-[55px] text-white bg-[#333333] font-bold rounded-xl">Đăng nhập</button>
-                </div>
+                </form>
                 <div class="text-center">
                     <a href="#" class="text-[14px] font-[500] ml-1 text-white text-center ">Chưa có tài khoản? đăng ký
                         ngay</a>

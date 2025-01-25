@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Size;
+use App\Models\Category;
 
 class ProductDetailController extends Controller
 {
@@ -11,15 +14,36 @@ class ProductDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-
         //
         $show_header = 0;
         $show_footer = 1;
+
+        $product = Product::findOrFail($id);
+        // echo $product;
+        $product->formatted_price = number_format($product->price, 0, ',', '.') . 'đ';
+        $product->formatted_total_price = number_format(($product->price - ($product->price * $product->discount_percent / 100)) - $product->discount_money, 0, ',', '.') . 'đ';
+
+
+        $sizes = Size::Where("product_id", $product->id)->get();
+        // dd($sizes);
+        $sizes = $sizes->map(function($item) {
+            $item->formatted_total_price = number_format(($item->price - ($item->price * $item->discount_percent / 100)) - $item->discount_money, 0, ',', '.') . 'đ';
+            $item->formatted_price = number_format($item->price, 0, ',', '.') . 'đ';
+            return $item;
+        });
+        $product->size = $sizes;
+
+        $category = Category::Where('id', $product->id)->first();
+        if($category){
+            $product->category = $category;
+        }
+
         return view('product-detail/product-detail', [
             'show_header' => $show_header,
-            'show_footer' => $show_footer
+            'show_footer' => $show_footer,
+            'product' => $product
         ]);
     }
 

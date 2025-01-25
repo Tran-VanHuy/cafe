@@ -10,6 +10,8 @@
 - [Giỏ hàng](http://127.0.0.1:8000/gio-hang)
 - [Đặt hàng](http://127.0.0.1:8000/dat-hang)
 - [Thông tin đặt hàng](http://127.0.0.1:8000/thong-tin-dat-hang)
+- [Biểu đổ (admin)](http://127.0.0.1:8000/admin/bieu-do)
+
 
 
 

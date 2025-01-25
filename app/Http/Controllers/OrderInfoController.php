@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemOrder;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderInfoController extends Controller
 {
@@ -14,11 +17,18 @@ class OrderInfoController extends Controller
     public function index()
     {
         //
+        $order = Order::with('item')->Where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        $order = $order->map(function($item) {
+            $item->formatted_total_price = number_format($item->total_price, 0, ',', '.') . 'đ';
+            return $item;
+        });
+        // dd($order->toArray());
         $show_header = 0;
         $show_footer = 1;
         return view('order-info/order-info', [
             'show_header' => $show_header,
-            'show_footer' => $show_footer
+            'show_footer' => $show_footer,
+            'order' => $order
         ]);
     }
 
