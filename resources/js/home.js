@@ -18,6 +18,7 @@ $(document).ready(function () {
         const res = await getProductDetailApi(data.id)
         if (res.status === 200) {
             const { name, image, size, formatted_total_price, formatted_price, id } = res.data
+            
             $("#value-name-product").text(name)
             $("#value-image-product").attr("src", `/${image}`)
             let infoSize = ''
@@ -55,7 +56,7 @@ $(document).ready(function () {
     })
 
     $("#info-sizes").on("click", ".info-size", function () {
-
+        
         const data = $(this).data()
         
         if(data.formattedtotalprice == data.formattedprice){

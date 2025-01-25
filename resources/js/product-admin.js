@@ -227,15 +227,20 @@ $(document).ready(function () {
             category: $("#category").val(),
             itemInfo: itemInfo.map(item => ({
                 name: item.nameItem,
-                price: item.price,
+                price: !item.price || item.price < 1 ? priceProduct :  item.price,
                 discount_percent: item.discountPercent,
                 discount_money: item.discountMoney,
                 quantity: item.quantity
             }))
         }
 
+        if(!itemInfo || itemInfo.length === 0 ){
+            toastr.error(`Chưa thêm thông tin ${info}...!`);
+            $(".bi-plus-circle").attr("fill", "red")
+            return;
+        }
         if (!body.name || !body.price || !body.quantity || !image1 || !image2 || !image3 || !image4 || !image5) {
-
+            toastr.error("Thông tin chưa nhập đầy đủ...!");
             return;
         } else {
             axios.post(PRODUCT_API.CREATE, body)
